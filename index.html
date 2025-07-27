@@ -378,11 +378,83 @@
     </div>
   </div>
 
-  <div style="display: flex; justify-content: center; gap: 10px; margin-top: 2rem; padding: 1rem; flex-wrap: wrap;">
-    <button onclick="generateTXT()" style="background: #222; border: 1px solid var(--primary-color); color: var(--primary-color); padding: 12px 24px; font-size: 1rem; border-radius: 6px; cursor: pointer; font-family: monospace;">Generate Text</button>
-    <button onclick="copyToClipboard()" style="background: #333; border: 1px solid #00f; color: #00f; padding: 12px 24px; font-size: 1rem; border-radius: 6px; cursor: pointer; font-family: monospace;">📋 Copy to Clipboard</button>
-    <button onclick="redirectToDoxbin()" style="background: #333; border: 1px solid var(--tertiary-color); color: var(--tertiary-color); padding: 12px 24px; font-size: 1rem; border-radius: 6px; cursor: pointer; font-family: monospace;">🌐 Open Doxbin.net</button>
+ <div style="display: flex; flex-direction: column; align-items: center; margin-top: 2rem; font-family: monospace;">
+  <!-- Primary Buttons -->
+  <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; padding: 1rem;">
+    <button onclick="generateTXT()" class="cool-button primary">✨ Generate Text</button>
+    <button onclick="copyToClipboard()" class="cool-button primary-blue">📋 Copy to Clipboard</button>
   </div>
+
+  <!-- Divider -->
+  <div style="width: 100%; max-width: 600px; border-top: 2px dashed #555; margin: 1rem 0;"></div>
+
+  <!-- Link Buttons -->
+  <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; padding: 1rem;">
+    <a href="https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something" target="_blank">
+      <button class="cool-button link-orange">🧾 ASCII Generator</button>
+    </a>
+    <a href="https://github.com/levifrsn63" target="_blank">
+      <button class="cool-button link-green">💻 GitHub Profile</button>
+    </a>
+    <a href="https://catbox.moe/" target="_blank">
+      <button class="cool-button link-pink">📷 Upload Image</button>
+    </a>
+    <a href="https://doxbin.net" target="_blank">
+      <button class="cool-button link-red">🌐 Open Doxbin.net</button>
+    </a>
+  </div>
+</div>
+
+<!-- Styles -->
+<style>
+  .cool-button {
+    padding: 12px 24px;
+    font-size: 1rem;
+    border: 1px solid;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: monospace;
+    background-color: #1e1e1e;
+    transition: all 0.2s ease;
+  }
+
+  .cool-button:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+
+  .primary {
+    color: var(--primary-color, #00ffee);
+    border-color: var(--primary-color, #00ffee);
+  }
+
+  .primary-blue {
+    color: #00f;
+    border-color: #00f;
+    background-color: #2a2a2a;
+  }
+
+  .link-orange {
+    color: #ff8c00;
+    border-color: #ff8c00;
+  }
+
+  .link-green {
+    color: #00c853;
+    border-color: #00c853;
+  }
+
+  .link-pink {
+    color: #e91e63;
+    border-color: #e91e63;
+  }
+
+  .link-red {
+    color: var(--tertiary-color, #f00);
+    border-color: var(--tertiary-color, #f00);
+  }
+</style>
+
 
   <div class="ascii-box hidden" id="previewBox"></div>
 
@@ -807,7 +879,7 @@
 
   // Redirect to doxbin
   function redirectToDoxbin() {
-    window.open('https://doxbin.net', '_blank');
+    window.open('https://doxbin.net/home', '_blank');
   }
 
   // Initialize on page load
