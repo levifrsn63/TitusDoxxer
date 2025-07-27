@@ -12,16 +12,16 @@
 
   <style>
     :root {
-      --primary-color: #64748b;
-      --secondary-color: #475569;
-      --tertiary-color: #dc2626;
-      --accent-color: #059669;
-      --bg-dark: #2c2c2c;
-      --bg-darker: #1e293b;
-      --bg-light: #334155;
-      --text-primary: #f1f5f9;
-      --text-secondary: #94a3b8;
-      --border-color: #475569;
+      --primary-color: #00ff00;
+      --secondary-color: #00aa00;
+      --tertiary-color: #ff0000;
+      --accent-color: #00ffff;
+      --bg-dark: #000000;
+      --bg-darker: #111111;
+      --bg-light: #1a1a1a;
+      --text-primary: #00ff00;
+      --text-secondary: #666666;
+      --border-color: #333333;
     }
 
     * {
@@ -29,14 +29,16 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+      font-family: 'Courier New', Courier, monospace;
       background: var(--bg-dark);
       color: var(--text-primary);
       padding: 0.75rem;
       max-width: 900px;
       margin: 0 auto;
-      line-height: 1.5;
+      line-height: 1.4;
       min-height: 100vh;
+      font-size: 14px;
+      letter-spacing: 0.02em;
     }
 
     @media (min-width: 768px) {
@@ -49,19 +51,19 @@
       width: 100%;
       margin: 8px 0 16px 0;
       background: var(--bg-darker);
-      border: 1px solid var(--border-color);
+      border: 2px solid var(--border-color);
       color: var(--text-primary);
       padding: 0.75rem;
       font-family: inherit;
       font-size: 0.9rem;
-      border-radius: 6px;
+      border-radius: 0;
       transition: all 0.2s ease;
     }
 
     input:focus, textarea:focus, select:focus {
       outline: none;
       border-color: var(--primary-color);
-      box-shadow: 0 0 0 2px rgba(0, 212, 170, 0.1);
+      box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
     }
     label {
       margin-top: 1rem;
@@ -73,9 +75,9 @@
 
     .section {
       margin-bottom: 1.5rem;
-      border: 1px solid var(--border-color);
+      border: 2px solid var(--border-color);
       padding: 1rem;
-      border-radius: 8px;
+      border-radius: 0;
       background: var(--bg-darker);
     }
 
@@ -95,6 +97,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+    
     }
 
     @media (min-width: 768px) {
@@ -107,13 +110,14 @@
       white-space: pre-wrap;
       background: var(--bg-dark);
       padding: 1.5rem;
-      border: 1px solid var(--border-color);
+      border: 2px solid var(--primary-color);
       margin-top: 2rem;
       max-height: 350px;
       overflow-y: auto;
       font-size: 0.85rem;
-      border-radius: 8px;
+      border-radius: 0;
       font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+      box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
     }
 
     .relative-field, .portfolio-field {
@@ -259,11 +263,58 @@
       <button onclick="closeSettings()" style="margin-top: 20px; background: var(--bg-light); border: 1px solid var(--primary-color); color: var(--primary-color); padding: 12px 20px; border-radius: 8px; cursor: pointer; transition: all 0.2s ease; font-weight: 600;">Close</button>
     </div>
   </div>
+  
+  <pre style="
+    text-align: center;
+    margin: auto 2rem -20px;
+    font-size: 0.6rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-family: monospace;
+    line-height: 1;
+    transform: translateX(-10px); /* <- This nudges it 10px left */
+  ">
+    
+    
+       _______  ___  _______  __   __  _______ 
+      |       ||   ||       ||  | |  ||       |
+      |_     _||   ||_     _||  | |  ||  _____|
+        |   |  |   |  |   |  |  |_|  || |_____ 
+        |   |  |   |  |   |  |       ||_____  |
+        |   |  |   |  |   |  |       | _____| |
+        |___|  |___|_______  |_______||_______|
+      |      | |       ||  |_|  ||  |_|  |     
+      |  _    ||   _   ||       ||       |     
+      | | |   ||  | |  ||       ||       |     
+      | |_|   ||  |_|  | |     |  |     |      
+      |       ||       ||   _   ||   _   |     
+      |______| |_______||__| |__||__| |__|  
+       Created by @levifrsn63
 
-  <h1>TITUS'S DOXXING TOOL</h1>
+
+
+
+
+
+  </pre>
+
 
   <div style="margin-bottom: 1.5rem; padding-left: 0;">
     <button id="toggleAllBtn" onclick="toggleAllSections()" style="background: var(--bg-light); border: 1px solid var(--border-color); color: var(--text-secondary); padding: 8px 16px; font-size: 0.85rem; cursor: pointer; font-family: inherit; outline: none; border-radius: 6px; transition: all 0.2s ease; font-weight: 500;">📁 Collapse All</button>
+  </div>
+
+  <div class="section">
+    <div onclick="toggleSection('reason')" style="cursor: pointer; display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding: 12px 16px; background: var(--bg-light); border: 1px solid var(--border-color); border-radius: 8px; transition: all 0.2s ease;">
+      <button class="expand-btn" id="reasonArrow" style="pointer-events: none;">▼</button>
+      <label style="margin: 0; cursor: pointer; font-weight: 600; color: var(--text-primary);">Reason</label>
+    </div>
+    <div id="reasonSection">
+      <label>Reason of Dox</label>
+      <textarea id="reasonOfDox" placeholder="Enter the reason for this dox..." rows="4" style="resize: vertical;"></textarea>
+    </div>
   </div>
 
   <div class="section">
@@ -441,7 +492,7 @@
       const div = document.createElement('div');
       div.className = 'portfolio-field';
       div.innerHTML = `
-        <div style="background: var(--bg-light); padding: 8px; border: 1px solid var(--primary-color); color: var(--primary-color); font-family: monospace; border-radius: 3px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
+        <div style="background: var(--bg-dark); padding: 8px; border: 2px solid var(--primary-color); color: var(--primary-color); font-family: monospace; border-radius: 0; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);">
           <div style="display: flex; align-items: center; gap: 8px;">
             <span>${field.label || 'Untitled Field'}</span>
           </div>
@@ -456,16 +507,68 @@
             <input type="text" class="personal-label" data-index="${i}" value="${field.label}" oninput="updatePersonalFieldLabel(${i}, this.value)" style="margin-bottom: 16px;" />
           </div>
           <label>Field Value</label>
-          <input type="text" class="personal-value" data-index="${i}" value="${field.value}" oninput="updatePersonalFieldValue(${i}, this.value)" />
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <input type="text" class="personal-value" data-index="${i}" value="${field.value}" oninput="updatePersonalFieldValue(${i}, this.value)" style="flex: 1;" />
+            <button onclick="pasteFromClipboard(${i})" style="background: #333333; border: 1px solid #666666; color: #666666; padding: 8px; font-size: 0.9rem; border-radius: 4px; cursor: pointer; font-family: inherit; font-weight: 500; transition: all 0.2s ease; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;">📋</button>
+          </div>
         </div>
       `;
       personalContainer.appendChild(div);
     });
   }
 
+    function renderLinkFields() {
+    personalContainer.innerHTML = '';
+    personalFieldsData.forEach((field, i) => {
+      const div = document.createElement('div');
+      div.className = 'portfolio-field';
+      div.innerHTML = `
+        <div style="background: var(--bg-dark); padding: 8px; border: 2px solid var(--primary-color); color: var(--primary-color); font-family: monospace; border-radius: 0; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span>${field.label || 'Untitled Field'}</span>
+          </div>
+          <div class="button-container">
+            <button class="edit-btn" onclick="togglePersonalLabelEdit(${i})" title="${field.editing ? 'Save label' : 'Edit label'}">${field.editing ? '💾' : '✏️'}</button>
+            <button class="remove-btn" onclick="removePersonalField(${i})" title="Delete this field">🗑</button>
+          </div>
+        </div>
+        <div class="field-content">
+          <div id="personal-label-edit-${i}" style="display: ${field.editing ? 'block' : 'none'};">
+            <label>Field Label</label>
+            <input type="text" class="personal-label" data-index="${i}" value="${field.label}" oninput="updatePersonalFieldLabel(${i}, this.value)" style="margin-bottom: 16px;" />
+          </div>
+          <label>Field Value</label>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <input type="text" class="personal-value" data-index="${i}" value="${field.value}" oninput="updatePersonalFieldValue(${i}, this.value)" style="flex: 1;" />
+            <button onclick="pasteFromClipboard(${i})" style="background: #333333; border: 1px solid #666666; color: #666666; padding: 8px; font-size: 0.9rem; border-radius: 4px; cursor: pointer; font-family: inherit; font-weight: 500; transition: all 0.2s ease; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;">📋</button>
+          </div>
+        </div>
+      `;
+      personalContainer.appendChild(div);
+    });
+  }
+
+   function pasteFromClipboard(index) {
+        navigator.clipboard.readText().then(text => {
+            updatePersonalFieldValue(index, text);
+            // Update the input field directly without re-rendering
+            const input = document.querySelector(`input.personal-value[data-index="${index}"]`);
+            if (input) {
+                input.value = text;
+            }
+        }).catch(err => {
+            console.error('Failed to read clipboard contents: ', err);
+        });
+    }
+
   function addPersonalField() {
     personalFieldsData.push({label: '', value: '', editing: false});
     renderPersonalFields();
+  }
+
+   function addLinkField() {
+    personalFieldsData.push({label: '', value: '', editing: false});
+    renderLinkFields();
   }
 
   function removePersonalField(index) {
@@ -497,7 +600,7 @@
       const div = document.createElement('div');
       div.className = 'portfolio-field';
       div.innerHTML = `
-        <div style="background: var(--bg-light); padding: 8px; border: 1px solid var(--primary-color); color: var(--primary-color); font-family: monospace; border-radius: 3px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
+        <div style="background: var(--bg-dark); padding: 8px; border: 2px solid var(--primary-color); color: var(--primary-color); font-family: monospace; border-radius: 0; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);">
           <div style="display: flex; align-items: center; gap: 8px;">
             <span>${field.label || 'Untitled Field'}</span>
           </div>
@@ -553,6 +656,19 @@
       content += headerArt + '\n\n';
     }
 
+    // Add reason section if provided
+    const reasonText = document.getElementById('reasonOfDox').value.trim();
+    if (reasonText) {
+      content += '╔═════════════════════════════════════════════════════════════════════════════╗\n';
+      content += '║                              REASON OF DOX                                  ║\n';
+      content += '╚═════════════════════════════════════════════════════════════════════════════╝\n\n';
+      content += reasonText + '\n\n';
+
+      if (separatorArt) {
+        content += separatorArt + '\n\n';
+      }
+    }
+
     // Header for Personal Information
     content += '╔═════════════════════════════════════════════════════════════════════════════╗\n';
     content += '║                          PERSONAL INFORMATION                               ║\n';
@@ -577,7 +693,7 @@
     if (relativeCount > 0) {
       content += '╔═══╦═══════════════════════╦═══╦════════════════════════════════════════╦═════╗\n';
       content += '║░░░║       RELATIVES       ║ + ║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║ ITA ║\n';
-      content += '╚═══╩═══════════════════════╩═══╩════════════════════════════════════════╩═════╝\n\n';
+      content += '╚═══╩═══════════════════════╩═══╩════════════════════════════════════════════════════╩═════╝\n\n';
 
       for (let i = 0; i < relativeCount; i++) {
         content += `Relative ${i + 1}:\n`;
@@ -684,6 +800,7 @@
 
   // Section collapse state
   const sectionStates = {
+    reason: false,
     personal: false,
     relatives: false,
     portfolio: false,
