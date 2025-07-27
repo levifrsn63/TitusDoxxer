@@ -12,64 +12,119 @@
 
   <style>
     :root {
-      --primary-color: #0f0;
-      --secondary-color: #00f;
-      --tertiary-color: #ff0;
+      --primary-color: #64748b;
+      --secondary-color: #475569;
+      --tertiary-color: #dc2626;
+      --accent-color: #059669;
+      --bg-dark: #2c2c2c;
+      --bg-darker: #1e293b;
+      --bg-light: #334155;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --border-color: #475569;
     }
-    body {
-      font-family: monospace;
-      background: #111;
-      color: var(--primary-color);
-      padding: 2rem;
-      max-width: 900px;
-      margin: auto;
-    }
-    input, textarea, select, button {
-      width: calc(100% - 1rem);
-      margin: 8px 0 16px 0;
-      background: #222;
-      border: 1px solid var(--primary-color);
-      color: var(--primary-color);
-      padding: 0.5rem;
-      font-family: monospace;
-      font-size: 1rem;
+
+    * {
       box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      padding: 0.75rem;
+      max-width: 900px;
+      margin: 0 auto;
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    @media (min-width: 768px) {
+      body {
+        padding: 2rem;
+      }
+    }
+
+    input, textarea, select, button {
+      width: 100%;
+      margin: 8px 0 16px 0;
+      background: var(--bg-darker);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 0.75rem;
+      font-family: inherit;
+      font-size: 0.9rem;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(0, 212, 170, 0.1);
     }
     label {
       margin-top: 1rem;
       display: block;
-      font-weight: bold;
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 0.9rem;
     }
+
     .section {
-      margin-bottom: 2rem;
-      border: 2px solid var(--primary-color);
-      padding: 1rem 1.5rem 1.5rem 1.5rem;
-      border-radius: 6px;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--border-color);
+      padding: 1rem;
+      border-radius: 8px;
+      background: var(--bg-darker);
     }
+
+    @media (min-width: 768px) {
+      .section {
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+      }
+    }
+
     h1 {
       text-align: center;
-      margin-bottom: 2rem;
-      letter-spacing: 0.1em;
+      margin: 0 0 2rem 0;
+      font-size: 1.75rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+      }
     }
     .ascii-box {
       white-space: pre-wrap;
-      background: #000;
-      padding: 1rem;
-      border: 2px solid var(--primary-color);
+      background: var(--bg-dark);
+      padding: 1.5rem;
+      border: 1px solid var(--border-color);
       margin-top: 2rem;
       max-height: 350px;
       overflow-y: auto;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
+      border-radius: 8px;
+      font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
     }
+
     .relative-field, .portfolio-field {
-      border: 1px dashed var(--primary-color);
-      padding: 16px;
-      margin: 12px 0;
+      border: 1px solid var(--border-color);
+      padding: 1rem;
+      margin: 0.75rem 0;
       position: relative;
-      border-radius: 6px;
-      background: rgba(0, 255, 0, 0.02);
+      border-radius: 8px;
+      background: var(--bg-light);
     }
-    
+
     .expand-btn {
       background: none;
       border: none;
@@ -80,69 +135,75 @@
       width: auto;
       margin: 0;
       outline: none;
-      transition: transform 0.2s ease;
+      transition: all 0.2s ease;
     }
     .expand-btn:hover {
+      color: var(--accent-color);
       transform: scale(1.1);
     }
     .expand-btn.collapsed {
       transform: rotate(-90deg);
     }
+
     .remove-btn {
       position: absolute;
       top: 8px;
       right: 8px;
-      background: #111;
-      border: 1px solid #f00;
-      color: #f00;
+      background: var(--bg-darker);
+      border: 1px solid var(--tertiary-color);
+      color: var(--tertiary-color);
       cursor: pointer;
-      padding: 4px 8px;
-      font-size: 0.9rem;
+      padding: 6px 10px;
+      font-size: 0.8rem;
       user-select: none;
-      border-radius: 3px;
+      border-radius: 6px;
       transition: all 0.2s ease;
       width: auto;
       margin: 0;
       line-height: 1;
     }
     .remove-btn:hover {
-      background: #f00;
-      color: #000;
-      transform: scale(1.1);
+      background: var(--tertiary-color);
+      color: var(--bg-dark);
+      transform: translateY(-1px);
     }
+
     .add-btn {
-      background: #111;
+      background: var(--bg-darker);
       border: 1px solid var(--primary-color);
       color: var(--primary-color);
       cursor: pointer;
-      padding: 0.8rem 1.2rem;
-      font-size: 1rem;
+      padding: 0.875rem 1.25rem;
+      font-size: 0.9rem;
       margin-top: 16px;
       user-select: none;
-      border-radius: 6px;
+      border-radius: 8px;
       transition: all 0.2s ease;
-      font-weight: bold;
+      font-weight: 600;
     }
     .add-btn:hover {
       background: var(--primary-color);
-      color: #000;
+      color: var(--bg-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 212, 170, 0.3);
     }
+
     .edit-btn {
-      background: #111;
-      border: 1px solid var(--primary-color);
-      color: var(--primary-color);
+      background: var(--bg-darker);
+      border: 1px solid var(--secondary-color);
+      color: var(--secondary-color);
       cursor: pointer;
-      padding: 4px 8px;
-      font-size: 0.9rem;
+      padding: 6px 10px;
+      font-size: 0.8rem;
       user-select: none;
-      border-radius: 3px;
-      transition: background 0.2s ease;
+      border-radius: 6px;
+      transition: all 0.2s ease;
       width: auto;
       margin: 0;
     }
     .edit-btn:hover {
-      background: var(--primary-color);
-      color: #000;
+      background: var(--secondary-color);
+      color: var(--bg-dark);
     }
     .button-container {
       display: flex;
@@ -162,33 +223,53 @@
   </style>
 </head>
 <body>
-  <div style="position: absolute; top: 20px; right: 20px;">
-    <button onclick="openSettings()" style="background: #222; border: 1px solid #0f0; color: #0f0; padding: 8px; border-radius: 50%; cursor: pointer; font-size: 16px; width: 40px; height: 40px;">⚙️</button>
+  <div class="settings-container" style="position: fixed; top: 1rem; right: 1rem; z-index: 100;">
+    <button onclick="openSettings()" style="background: var(--bg-darker); border: 1px solid var(--primary-color); color: var(--primary-color); padding: 8px; border-radius: 50%; cursor: pointer; font-size: 16px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);">⚙️</button>
   </div>
-  
-  <div id="settingsModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000;">
-    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #111; border: 2px solid #0f0; padding: 20px; border-radius: 8px; min-width: 300px;">
-      <h3 style="margin-top: 0; color: #0f0;">Color Settings</h3>
+
+  <style>
+    .settings-container button:hover {
+      background: var(--primary-color) !important;
+      color: var(--bg-dark) !important;
+      transform: rotate(90deg) scale(1.05);
+    }
+
+    @media (min-width: 768px) {
+      .settings-container {
+        top: 2rem !important;
+        right: 2rem !important;
+      }
+      .settings-container button {
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 18px !important;
+      }
+    }
+  </style>
+
+  <div id="settingsModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); z-index: 1000; backdrop-filter: blur(4px);">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--bg-darker); border: 1px solid var(--border-color); padding: 2rem; border-radius: 12px; width: 90%; max-width: 400px; max-height: 90%; overflow-y: auto; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);">
+      <h3 style="margin-top: 0; color: var(--primary-color); font-size: 1.25rem; font-weight: 600;">Theme Settings</h3>
       <label>Primary Color</label>
-      <input type="color" id="primaryColor" value="#00ff00" onchange="updateColors()" style="width: 100%; height: 40px;">
+      <input type="color" id="primaryColor" value="#64748b" onchange="updateColors()" style="width: 100%; height: 44px; border-radius: 8px;">
       <label>Secondary Color</label>
-      <input type="color" id="secondaryColor" value="#0000ff" onchange="updateColors()" style="width: 100%; height: 40px;">
+      <input type="color" id="secondaryColor" value="#475569" onchange="updateColors()" style="width: 100%; height: 44px; border-radius: 8px;">
       <label>Tertiary Color</label>
-      <input type="color" id="tertiaryColor" value="#ffff00" onchange="updateColors()" style="width: 100%; height: 40px;">
-      <button onclick="closeSettings()" style="margin-top: 15px; background: #333; border: 1px solid #0f0; color: #0f0; padding: 8px 16px; border-radius: 4px; cursor: pointer;">Close</button>
+      <input type="color" id="tertiaryColor" value="#dc2626" onchange="updateColors()" style="width: 100%; height: 44px; border-radius: 8px;">
+      <button onclick="closeSettings()" style="margin-top: 20px; background: var(--bg-light); border: 1px solid var(--primary-color); color: var(--primary-color); padding: 12px 20px; border-radius: 8px; cursor: pointer; transition: all 0.2s ease; font-weight: 600;">Close</button>
     </div>
   </div>
 
   <h1>TITUS'S DOXXING TOOL</h1>
 
-  <div style="margin-bottom: 1rem;">
-    <button id="toggleAllBtn" onclick="toggleAllSections()" style="background: transparent; border: none; color: var(--primary-color); padding: 4px 8px; font-size: 0.8rem; cursor: pointer; font-family: monospace; outline: none;">📁 Collapse All</button>
+  <div style="margin-bottom: 1.5rem; padding-left: 0;">
+    <button id="toggleAllBtn" onclick="toggleAllSections()" style="background: var(--bg-light); border: 1px solid var(--border-color); color: var(--text-secondary); padding: 8px 16px; font-size: 0.85rem; cursor: pointer; font-family: inherit; outline: none; border-radius: 6px; transition: all 0.2s ease; font-weight: 500;">📁 Collapse All</button>
   </div>
 
   <div class="section">
-    <div onclick="toggleSection('personal')" style="cursor: pointer; display: flex; align-items: center; gap: 8px; margin-bottom: 16px; padding: 8px; background: #333; border: 1px solid var(--primary-color); border-radius: 3px;">
+    <div onclick="toggleSection('personal')" style="cursor: pointer; display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding: 12px 16px; background: var(--bg-light); border: 1px solid var(--border-color); border-radius: 8px; transition: all 0.2s ease;">
       <button class="expand-btn" id="personalArrow" style="pointer-events: none;">▼</button>
-      <label style="margin: 0; cursor: pointer;">Personal Information</label>
+      <label style="margin: 0; cursor: pointer; font-weight: 600; color: var(--text-primary);">Personal Information</label>
     </div>
     <div id="personalSection">
       <div id="personalFields"></div>
@@ -197,9 +278,9 @@
   </div>
 
   <div class="section">
-    <div onclick="toggleSection('relatives')" style="cursor: pointer; display: flex; align-items: center; gap: 8px; margin-bottom: 16px; padding: 8px; background: #333; border: 1px solid var(--primary-color); border-radius: 3px;">
+    <div onclick="toggleSection('relatives')" style="cursor: pointer; display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding: 12px 16px; background: var(--bg-light); border: 1px solid var(--border-color); border-radius: 8px; transition: all 0.2s ease;">
       <button class="expand-btn" id="relativesArrow" style="pointer-events: none;">▼</button>
-      <label style="margin: 0; cursor: pointer;">Number of Relatives</label>
+      <label style="margin: 0; cursor: pointer; font-weight: 600; color: var(--text-primary);">Number of Relatives</label>
     </div>
     <div id="relativesSection">
       <select id="relativeCount" onchange="renderRelatives()">
@@ -213,9 +294,9 @@
   </div>
 
   <div class="section">
-    <div onclick="toggleSection('portfolio')" style="cursor: pointer; display: flex; align-items: center; gap: 8px; margin-bottom: 16px; padding: 8px; background: #333; border: 1px solid var(--primary-color); border-radius: 3px;">
+    <div onclick="toggleSection('portfolio')" style="cursor: pointer; display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding: 12px 16px; background: var(--bg-light); border: 1px solid var(--border-color); border-radius: 8px; transition: all 0.2s ease;">
       <button class="expand-btn" id="portfolioArrow" style="pointer-events: none;">▼</button>
-      <label style="margin: 0; cursor: pointer;">Portfolio</label>
+      <label style="margin: 0; cursor: pointer; font-weight: 600; color: var(--text-primary);">Portfolio</label>
     </div>
     <div id="portfolioSection">
       <div id="portfolioFields"></div>
@@ -224,9 +305,9 @@
   </div>
 
   <div class="section">
-    <div onclick="toggleSection('ascii')" style="cursor: pointer; display: flex; align-items: center; gap: 8px; margin-bottom: 16px; padding: 8px; background: #333; border: 1px solid var(--primary-color); border-radius: 3px;">
+    <div onclick="toggleSection('ascii')" style="cursor: pointer; display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding: 12px 16px; background: var(--bg-light); border: 1px solid var(--border-color); border-radius: 8px; transition: all 0.2s ease;">
       <button class="expand-btn" id="asciiArrow" style="pointer-events: none;">▼</button>
-      <label style="margin: 0; cursor: pointer;">ASCII Art Settings</label>
+      <label style="margin: 0; cursor: pointer; font-weight: 600; color: var(--text-primary);">ASCII Art Settings</label>
     </div>
     <div id="asciiSection">
       <label>ASCII Art Header (optional)</label>
@@ -240,16 +321,43 @@
     </div>
   </div>
 
-  <div style="display: flex; justify-content: center; gap: 10px; margin-top: 2rem; padding: 1rem;">
-    <button onclick="generateTXT()" style="background: #222; border: 1px solid var(--primary-color); color: var(--primary-color); padding: 12px 24px; font-size: 1rem; border-radius: 6px; cursor: pointer; font-family: monospace;">Generate Text</button>
-    <button onclick="copyToClipboard()" style="background: #333; border: 1px solid #00f; color: #00f; padding: 12px 24px; font-size: 1rem; border-radius: 6px; cursor: pointer; font-family: monospace;">📋 Copy to Clipboard</button>
-    <button onclick="redirectToDoxbin()" style="background: #333; border: 1px solid var(--tertiary-color); color: var(--tertiary-color); padding: 12px 24px; font-size: 1rem; border-radius: 6px; cursor: pointer; font-family: monospace;">🌐 Open Doxbin.net</button>
+  <div class="main-buttons" style="display: flex; flex-direction: column; gap: 12px; margin-top: 3rem; padding: 0;">
+    <button onclick="generateTXT()" style="background: var(--primary-color); border: 1px solid var(--primary-color); color: var(--bg-dark); padding: 16px 20px; font-size: 1rem; border-radius: 8px; cursor: pointer; font-family: inherit; width: 100%; font-weight: 600; transition: all 0.2s ease; box-shadow: 0 2px 4px rgba(0, 212, 170, 0.2);">✨ Generate Text</button>
+    <button onclick="copyToClipboard()" style="background: var(--bg-darker); border: 1px solid var(--secondary-color); color: var(--secondary-color); padding: 14px 20px; font-size: 0.95rem; border-radius: 8px; cursor: pointer; font-family: inherit; width: 100%; font-weight: 500; transition: all 0.2s ease;">📋 Copy to Clipboard</button>
+    <button onclick="redirectToDoxbin()" style="background: var(--bg-darker); border: 1px solid var(--tertiary-color); color: var(--tertiary-color); padding: 14px 20px; font-size: 0.95rem; border-radius: 8px; cursor: pointer; font-family: inherit; width: 100%; font-weight: 500; transition: all 0.2s ease;">🌐 Open Doxbin.net</button>
+    <button onclick="redirectToASCII()" style="background: var(--bg-darker); border: 1px solid var(--accent-color); color: var(--accent-color); padding: 14px 20px; font-size: 0.95rem; border-radius: 8px; cursor: pointer; font-family: inherit; width: 100%; font-weight: 500; transition: all 0.2s ease;">🎨 ASCII Generator</button>
   </div>
+
+  <style>
+    .main-buttons button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .main-buttons button:first-child:hover {
+      background: var(--accent-color);
+      border-color: var(--accent-color);
+      box-shadow: 0 4px 16px rgba(255, 217, 61, 0.3);
+    }
+
+    @media (min-width: 768px) {
+      .main-buttons {
+        flex-direction: row !important;
+        justify-content: center;
+        gap: 16px !important;
+      }
+      .main-buttons button {
+        width: auto !important;
+        padding: 16px 32px !important;
+        font-size: 1rem !important;
+      }
+    }
+  </style>
 
   <div class="ascii-box" id="previewBox" style="display:none;"></div>
 
-  <div style="text-align: center; margin-top: 2rem; padding: 1rem; border-top: 1px solid var(--primary-color); color: #666; font-size: 0.9rem;">
-    <p style="margin: 0;">Created by <a href="https://github.com/levifrsn63" target="_blank" style="color: var(--primary-color); text-decoration: none;">levifrsn63</a></p>
+  <div style="text-align: center; margin-top: 3rem; padding: 2rem 0 1rem 0; border-top: 1px solid var(--border-color); color: var(--text-secondary); font-size: 0.9rem;">
+    <p style="margin: 0;">Created by <a href="https://github.com/levifrsn63" target="_blank" style="color: var(--primary-color); text-decoration: underline; font-weight: 500; transition: color 0.2s ease;">@levifrsn63</a></p>
   </div>
 
 <script>
@@ -333,7 +441,7 @@
       const div = document.createElement('div');
       div.className = 'portfolio-field';
       div.innerHTML = `
-        <div style="background: #333; padding: 8px; border: 1px solid var(--primary-color); color: var(--primary-color); font-family: monospace; border-radius: 3px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
+        <div style="background: var(--bg-light); padding: 8px; border: 1px solid var(--primary-color); color: var(--primary-color); font-family: monospace; border-radius: 3px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
           <div style="display: flex; align-items: center; gap: 8px;">
             <span>${field.label || 'Untitled Field'}</span>
           </div>
@@ -389,7 +497,7 @@
       const div = document.createElement('div');
       div.className = 'portfolio-field';
       div.innerHTML = `
-        <div style="background: #333; padding: 8px; border: 1px solid var(--primary-color); color: var(--primary-color); font-family: monospace; border-radius: 3px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
+        <div style="background: var(--bg-light); padding: 8px; border: 1px solid var(--primary-color); color: var(--primary-color); font-family: monospace; border-radius: 3px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
           <div style="display: flex; align-items: center; gap: 8px;">
             <span>${field.label || 'Untitled Field'}</span>
           </div>
@@ -516,12 +624,12 @@
   function copyToClipboard() {
     const previewBox = document.getElementById('previewBox');
     const content = previewBox.textContent;
-    
+
     if (!content) {
       alert('Please generate text first!');
       return;
     }
-    
+
     navigator.clipboard.writeText(content).then(() => {
       // Visual feedback
       const button = event.target;
@@ -529,7 +637,7 @@
       button.textContent = '✅ Copied!';
       button.style.background = '#0f0';
       button.style.color = '#000';
-      
+
       setTimeout(() => {
         button.textContent = originalText;
         button.style.background = '#333';
@@ -560,7 +668,7 @@
     const primary = document.getElementById('primaryColor').value;
     const secondary = document.getElementById('secondaryColor').value;
     const tertiary = document.getElementById('tertiaryColor').value;
-    
+
     document.documentElement.style.setProperty('--primary-color', primary);
     document.documentElement.style.setProperty('--secondary-color', secondary);
     document.documentElement.style.setProperty('--tertiary-color', tertiary);
@@ -568,6 +676,10 @@
 
   function redirectToDoxbin() {
     window.open('https://doxbin.net', '_blank');
+  }
+
+  function redirectToASCII() {
+    window.open('https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20', '_blank');
   }
 
   // Section collapse state
@@ -582,7 +694,7 @@
     sectionStates[sectionName] = !sectionStates[sectionName];
     const section = document.getElementById(sectionName + 'Section');
     const arrow = document.getElementById(sectionName + 'Arrow');
-    
+
     if (sectionStates[sectionName]) {
       section.style.display = 'none';
       arrow.classList.add('collapsed');
@@ -604,7 +716,7 @@
   function toggleAllSections() {
     const toggleBtn = document.getElementById('toggleAllBtn');
     const anyExpanded = Object.values(sectionStates).some(state => !state);
-    
+
     if (anyExpanded) {
       // Collapse all
       Object.keys(sectionStates).forEach(sectionName => {
