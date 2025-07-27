@@ -8,13 +8,13 @@ TITUS's Doxxing Tool is a web-based application that allows you to create profes
 ## 🚀 Getting Started
 
 ### 🔗 Accessing the App
-To access the application, go to [https://levifrsn63.github.io/doxxer/](https://levifrsn63.github.io/doxxer/) and follow these steps:
+To access the application, go to [https://levifrsn63.github.io/TitusDoxxer/](https://levifrsn63.github.io/TitusDoxxer/) and follow these steps:
 1. Tap on the Share button in your browser. 
 2. Select "Add to Home Screen". 
 3. Name the app as desired and tap "Add". 
 
 ### 💻 For Desktop Users
-For Windows, macOS, and Linux users, simply open any web browser and navigate to [https://levifrsn63.github.io/doxxer/](https://levifrsn63.github.io/doxxer/). You’re good to go!
+For Windows, macOS, and Linux users, simply open any web browser and navigate to [https://levifrsn63.github.io/TitusDoxxer/](https://levifrsn63.github.io/TitusDoxxer/). You’re good to go!
 
 ---
 
@@ -33,23 +33,23 @@ For Windows, macOS, and Linux users, simply open any web browser and navigate to
 
 ### 🖥️ Windows
 1. Open a web browser (like Chrome or Firefox). 
-2. Go to [https://levifrsn63.github.io/doxxer/](https://levifrsn63.github.io/doxxer/).
+2. Go to [https://levifrsn63.github.io/TitusDoxxer/](https://levifrsn63.github.io/TitusDoxxer/)).
 3. To add it to your desktop:
    - In Chrome, click the three dots in the upper right corner, hover over "More tools," then select "Create shortcut..." ⚙
    - In Firefox, click the star in the URL bar, select "Bookmarking," and then choose "Show All Bookmarks" to create a desktop shortcut. 
 
 ### 🍏 macOS
-1. Open Safari and navigate to [https://levifrsn63.github.io/doxxer/](https://levifrsn63.github.io/doxxer/).
+1. Open Safari and navigate to [https://levifrsn63.github.io/TitusDoxxer/](https://levifrsn63.github.io/TitusDoxxer/).
 2. Tap on the Share button (the square with an arrow pointing up) and choose "Add to Home Screen." 
 
 ### 📱 iOS
-1. Open Safari and navigate to [https://levifrsn63.github.io/doxxer/](https://levifrsn63.github.io/doxxer/).
+1. Open Safari and navigate to [https://levifrsn63.github.io/TitusDoxxer/](https://levifrsn63.github.io/TitusDoxxer/).
 2. Tap the Share button (the square with an arrow pointing up). 
 3. Select "Add to Home Screen." 
 4. Name the app as desired and tap "Add." 
 
 ### 🤖 Android
-1. Open Chrome and navigate to [https://levifrsn63.github.io/doxxer/](https://levifrsn63.github.io/doxxer/).
+1. Open Chrome and navigate to [https://levifrsn63.github.io/TitusDoxxer/](https://levifrsn63.github.io/TitusDoxxer/).
 2. Tap the three vertical dots menu in the top right corner. 
 3. Select "Add to Home Screen." 
 4. Name the app as desired and tap "Add." 
