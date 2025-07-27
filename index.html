@@ -355,29 +355,97 @@
     </div>
   </div>
 
-  <div class="section">
-    <div onclick="toggleSection('ascii')" style="cursor: pointer; display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding: 12px 16px; background: var(--bg-light); border: 1px solid var(--border-color); border-radius: 8px; transition: all 0.2s ease;">
-      <button class="expand-btn" id="asciiArrow" style="pointer-events: none;">▼</button>
-      <label style="margin: 0; cursor: pointer; font-weight: 600; color: var(--text-primary);">ASCII Art Settings</label>
-    </div>
-    <div id="asciiSection">
-      <label>ASCII Art Header (optional)</label>
-      <textarea id="asciiHeader" placeholder="Paste ASCII art for header here..." rows="6" style="font-family: monospace; white-space: pre; overflow-wrap: normal;"></textarea>
-
-      <label>ASCII Art Footer (optional)</label>
-      <textarea id="asciiFooter" placeholder="Paste ASCII art for footer here..." rows="6" style="font-family: monospace; white-space: pre; overflow-wrap: normal;"></textarea>
-
-      <label>ASCII Art Separator (optional)</label>
-      <textarea id="asciiSeparator" placeholder="Paste ASCII art to use between sections..." rows="4" style="font-family: monospace; white-space: pre; overflow-wrap: normal;"></textarea>
-    </div>
-  </div>
+ 
 
   <div class="main-buttons" style="display: flex; flex-direction: column; gap: 12px; margin-top: 3rem; padding: 0;">
-    <button onclick="generateTXT()" style="background: var(--primary-color); border: 1px solid var(--primary-color); color: var(--bg-dark); padding: 16px 20px; font-size: 1rem; border-radius: 8px; cursor: pointer; font-family: inherit; width: 100%; font-weight: 600; transition: all 0.2s ease; box-shadow: 0 2px 4px rgba(0, 212, 170, 0.2);">✨ Generate Text</button>
-    <button onclick="copyToClipboard()" style="background: var(--bg-darker); border: 1px solid var(--secondary-color); color: var(--secondary-color); padding: 14px 20px; font-size: 0.95rem; border-radius: 8px; cursor: pointer; font-family: inherit; width: 100%; font-weight: 500; transition: all 0.2s ease;">📋 Copy to Clipboard</button>
-    <button onclick="redirectToDoxbin()" style="background: var(--bg-darker); border: 1px solid var(--tertiary-color); color: var(--tertiary-color); padding: 14px 20px; font-size: 0.95rem; border-radius: 8px; cursor: pointer; font-family: inherit; width: 100%; font-weight: 500; transition: all 0.2s ease;">🌐 Open Doxbin.net</button>
-    <button onclick="redirectToASCII()" style="background: var(--bg-darker); border: 1px solid var(--accent-color); color: var(--accent-color); padding: 14px 20px; font-size: 0.95rem; border-radius: 8px; cursor: pointer; font-family: inherit; width: 100%; font-weight: 500; transition: all 0.2s ease;">🎨 ASCII Generator</button>
+
+    <!-- Generate Text -->
+    <button onclick="generateTXT()"
+      style="background: var(--primary-color);
+             border: 1px solid var(--primary-color);
+             color: var(--bg-dark);
+             padding: 16px 20px;
+             font-size: 1rem;
+             border-radius: 8px;
+             cursor: pointer;
+             font-family: inherit;
+             width: 100%;
+             font-weight: 600;
+             transition: all 0.2s ease;
+             box-shadow: 0 2px 4px rgba(0, 212, 170, 0.2);">
+      ✨ Generate Text
+    </button>
+
+    <!-- Copy to Clipboard -->
+    <button onclick="copyToClipboard()"
+      style="background: var(--bg-darker);
+             border: 1px solid var(--secondary-color);
+             color: var(--secondary-color);
+             padding: 14px 20px;
+             font-size: 0.95rem;
+             border-radius: 8px;
+             cursor: pointer;
+             font-family: inherit;
+             width: 100%;
+             font-weight: 500;
+             transition: all 0.2s ease;">
+      📋 Copy to Clipboard
+    </button>
+
+    <!-- Separator -->
+    <div style="height: 1px; background-color: #444; margin: 8px 0;"></div>
+
+    <!-- Open Doxbin -->
+    <button onclick="redirectToDoxbin()"
+      style="background: var(--bg-darker);
+             border: 1px solid var(--tertiary-color);
+             color: var(--tertiary-color);
+             padding: 14px 20px;
+             font-size: 0.95rem;
+             border-radius: 8px;
+             cursor: pointer;
+             font-family: inherit;
+             width: 100%;
+             font-weight: 500;
+             transition: all 0.2s ease;">
+      🌐 Open Doxbin.net
+    </button>
+
+    <!-- ASCII Generator -->
+    <button onclick="redirectToASCII()"
+      style="background: var(--bg-darker);
+             border: 1px solid var(--accent-color);
+             color: var(--accent-color);
+             padding: 14px 20px;
+             font-size: 0.95rem;
+             border-radius: 8px;
+             cursor: pointer;
+             font-family: inherit;
+             width: 100%;
+             font-weight: 500;
+             transition: all 0.2s ease;">
+      🎨 ASCII Generator
+    </button>
+
+    <!-- GitHub Link -->
+    <button onclick="window.location.href='https://github.com/levifrsn63'"
+      style="background: #f1c40f;
+             border: 1px solid #f1c40f;
+             color: #222;
+             padding: 14px 20px;
+             font-size: 0.95rem;
+             border-radius: 8px;
+             cursor: pointer;
+             font-family: inherit;
+             width: 100%;
+             font-weight: 600;
+             transition: all 0.2s ease;">
+       🚀 View My GitHub
+    </button>
+
   </div>
+
+
 
   <style>
     .main-buttons button:hover {
@@ -408,7 +476,7 @@
   <div class="ascii-box" id="previewBox" style="display:none;"></div>
 
   <div style="text-align: center; margin-top: 3rem; padding: 2rem 0 1rem 0; border-top: 1px solid var(--border-color); color: var(--text-secondary); font-size: 0.9rem;">
-    <p style="margin: 0;">Created by <a href="https://github.com/levifrsn63" target="_blank" style="color: var(--primary-color); text-decoration: underline; font-weight: 500; transition: color 0.2s ease;">@levifrsn63</a></p>
+    <p style="margin: 0;">GITHUB: <a href="https://github.com/levifrsn63" target="_blank" style="color: var(--primary-color); text-decoration: underline; font-weight: 500; transition: color 0.2s ease;">@levifrsn63</a></p>
   </div>
 
 <script>
