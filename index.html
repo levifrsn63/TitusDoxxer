@@ -56,7 +56,7 @@
       padding: 0.75rem;
       font-family: inherit;
       font-size: 0.9rem;
-      border-radius: 0;
+      border-radius: 8px;
       transition: all 0.2s ease;
     }
 
@@ -77,7 +77,7 @@
       margin-bottom: 1.5rem;
       border: 2px solid var(--border-color);
       padding: 1rem;
-      border-radius: 0;
+      border-radius: 12px;
       background: var(--bg-darker);
     }
 
@@ -114,7 +114,7 @@
       max-height: 350px;
       overflow-y: auto;
       font-size: 0.85rem;
-      border-radius: 0;
+      border-radius: 12px;
       font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
       box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
     }
@@ -270,7 +270,7 @@
       <button onclick="closeSettings()" style="margin-top: 20px; background: var(--bg-light); border: 1px solid var(--primary-color); color: var(--primary-color); padding: 12px 20px; border-radius: 8px; cursor: pointer; transition: all 0.2s ease; font-weight: 600;">Close</button>
     </div>
   </div>
-  
+
   <pre style="
     text-align: center;
     margin: auto 2rem -20px;
@@ -284,8 +284,8 @@
     line-height: 1;
     transform: translateX(-20px);
   ">
-    
-    
+
+
        _______  ___  _______  __   __  _______ 
       |       ||   ||       ||  | |  ||       |
       |_     _||   ||_     _||  | |  ||  _____|
@@ -507,7 +507,7 @@
     const primary = document.getElementById('primaryColor').value;
     const secondary = document.getElementById('secondaryColor').value;
     const tertiary = document.getElementById('tertiaryColor').value;
-    
+
     document.documentElement.style.setProperty('--primary-color', primary);
     document.documentElement.style.setProperty('--secondary-color', secondary);
     document.documentElement.style.setProperty('--tertiary-color', tertiary);
@@ -518,7 +518,7 @@
   function toggleSection(sectionName) {
     const section = document.getElementById(sectionName + 'Section');
     const arrow = document.getElementById(sectionName + 'Arrow');
-    
+
     if (section.style.display === 'none') {
       section.style.display = 'block';
       arrow.classList.remove('collapsed');
@@ -533,11 +533,11 @@
   function toggleAllSections() {
     const sections = ['reason', 'personal', 'relatives', 'portfolio', 'ascii'];
     const allCollapsed = sections.every(name => sectionsCollapsed[name]);
-    
+
     sections.forEach(sectionName => {
       const section = document.getElementById(sectionName + 'Section');
       const arrow = document.getElementById(sectionName + 'Arrow');
-      
+
       if (allCollapsed) {
         section.style.display = 'block';
         arrow.classList.remove('collapsed');
@@ -548,7 +548,7 @@
         sectionsCollapsed[sectionName] = true;
       }
     });
-    
+
     const btn = document.getElementById('toggleAllBtn');
     btn.textContent = allCollapsed ? '📁 Collapse All' : '📂 Expand All';
   }
@@ -557,11 +557,11 @@
   function renderPersonalFields() {
     const container = document.getElementById('personalFields');
     container.innerHTML = '';
-    
+
     personalFields.forEach((field, index) => {
       const div = document.createElement('div');
       div.className = 'relative-field';
-      
+
       if (field.editing) {
         div.innerHTML = `
           <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
@@ -584,7 +584,7 @@
           <input type="text" id="personal_${index}" value="${field.value}" onchange="updatePersonalField(${index}, this.value)" placeholder="Enter ${field.label.toLowerCase()}..." />
         `;
       }
-      
+
       container.appendChild(div);
     });
   }
@@ -664,11 +664,11 @@
   function renderPortfolioFields() {
     const container = document.getElementById('portfolioFields');
     container.innerHTML = '';
-    
+
     portfolioFields.forEach((field, index) => {
       const div = document.createElement('div');
       div.className = 'portfolio-field';
-      
+
       if (field.editing) {
         div.innerHTML = `
           <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
@@ -691,7 +691,7 @@
           <input type="text" id="portfolio_${index}" value="${field.value}" onchange="updatePortfolioField(${index}, this.value)" placeholder="Enter ${field.label.toLowerCase()}..." />
         `;
       }
-      
+
       container.appendChild(div);
     });
   }
@@ -735,13 +735,13 @@
   // Text generation function - FIXED
   function generateTXT() {
     let output = '';
-    
+
     // Add ASCII header if provided
     const asciiHeader = document.getElementById('asciiHeader').value;
     if (asciiHeader.trim()) {
       output += asciiHeader + '\n\n';
     }
-    
+
     // Add reason section
     const reason = document.getElementById('reasonOfDox').value;
     if (reason.trim()) {
@@ -750,15 +750,15 @@
       output += '═══════════════════════════════════════\n';
       output += reason + '\n\n';
     }
-    
+
     // Add ASCII separator if provided
     const asciiSeparator = document.getElementById('asciiSeparator').value;
-    
+
     // Add personal information
     output += '═══════════════════════════════════════\n';
     output += '           PERSONAL INFORMATION\n';
     output += '═══════════════════════════════════════\n';
-    
+
     personalFields.forEach(field => {
       const element = document.getElementById(`personal_${personalFields.indexOf(field)}`);
       const value = element ? element.value : field.value;
@@ -767,18 +767,18 @@
       }
     });
     output += '\n';
-    
+
     if (asciiSeparator.trim()) {
       output += asciiSeparator + '\n\n';
     }
-    
+
     // Add relatives information
     const relativeCount = parseInt(document.getElementById('relativeCount').value);
     if (relativeCount > 0) {
       output += '═══════════════════════════════════════\n';
       output += '              RELATIVES\n';
       output += '═══════════════════════════════════════\n';
-      
+
       for (let i = 0; i < relativeCount; i++) {
         const name = document.getElementById(`rel_name_${i}`)?.value || '';
         const known = document.getElementById(`rel_known_${i}`)?.value || '';
@@ -786,7 +786,7 @@
         const occ = document.getElementById(`rel_occ_${i}`)?.value || '';
         const phone = document.getElementById(`rel_phone_${i}`)?.value || '';
         const address = document.getElementById(`rel_address_${i}`)?.value || '';
-        
+
         if (name || known || age || occ || phone || address) {
           output += `\n--- Relative ${i + 1} ---\n`;
           if (name) output += `Name: ${name}\n`;
@@ -798,19 +798,19 @@
         }
       }
       output += '\n';
-      
+
       if (asciiSeparator.trim()) {
         output += asciiSeparator + '\n\n';
       }
     }
-    
+
     // Add portfolio information
     if (portfolioFields.length > 0) {
       let hasPortfolioData = false;
       let portfolioOutput = '═══════════════════════════════════════\n';
       portfolioOutput += '              PORTFOLIO\n';
       portfolioOutput += '═══════════════════════════════════════\n';
-      
+
       portfolioFields.forEach((field, index) => {
         const element = document.getElementById(`portfolio_${index}`);
         const value = element ? element.value : field.value;
@@ -819,27 +819,27 @@
           hasPortfolioData = true;
         }
       });
-      
+
       if (hasPortfolioData) {
         output += portfolioOutput + '\n';
       }
     }
-    
+
     // Add ASCII footer if provided
     const asciiFooter = document.getElementById('asciiFooter').value;
     if (asciiFooter.trim()) {
       output += asciiFooter + '\n';
     }
-    
+
     // Store generated text for clipboard
     generatedText = output;
-    
+
     // Display in preview box
     const previewBox = document.getElementById('previewBox');
     previewBox.textContent = output;
     previewBox.classList.remove('hidden');
     previewBox.classList.add('visible');
-    
+
     // Scroll to preview box
     previewBox.scrollIntoView({ behavior: 'smooth' });
   }
@@ -850,7 +850,7 @@
       alert('Please generate text first!');
       return;
     }
-    
+
     navigator.clipboard.writeText(generatedText).then(() => {
       // Visual feedback
       const btn = event.target;
@@ -858,7 +858,7 @@
       btn.textContent = '✅ Copied!';
       btn.style.background = 'var(--secondary-color)';
       btn.style.color = 'var(--bg-dark)';
-      
+
       setTimeout(() => {
         btn.textContent = originalText;
         btn.style.background = '#333';
@@ -872,7 +872,7 @@
       textArea.select();
       document.execCommand('copy');
       document.body.removeChild(textArea);
-      
+
       alert('Text copied to clipboard!');
     });
   }
