@@ -97,7 +97,6 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-    
     }
 
     @media (min-width: 768px) {
@@ -224,6 +223,14 @@
       min-width: auto;
       width: auto;
     }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .visible {
+      display: block !important;
+    }
   </style>
 </head>
 <body>
@@ -255,11 +262,11 @@
     <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--bg-darker); border: 1px solid var(--border-color); padding: 2rem; border-radius: 12px; width: 90%; max-width: 400px; max-height: 90%; overflow-y: auto; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);">
       <h3 style="margin-top: 0; color: var(--primary-color); font-size: 1.25rem; font-weight: 600;">Theme Settings</h3>
       <label>Primary Color</label>
-      <input type="color" id="primaryColor" value="#64748b" onchange="updateColors()" style="width: 100%; height: 44px; border-radius: 8px;">
+      <input type="color" id="primaryColor" value="#00ff00" onchange="updateColors()" style="width: 100%; height: 44px; border-radius: 8px;">
       <label>Secondary Color</label>
-      <input type="color" id="secondaryColor" value="#475569" onchange="updateColors()" style="width: 100%; height: 44px; border-radius: 8px;">
+      <input type="color" id="secondaryColor" value="#00aa00" onchange="updateColors()" style="width: 100%; height: 44px; border-radius: 8px;">
       <label>Tertiary Color</label>
-      <input type="color" id="tertiaryColor" value="#dc2626" onchange="updateColors()" style="width: 100%; height: 44px; border-radius: 8px;">
+      <input type="color" id="tertiaryColor" value="#ff0000" onchange="updateColors()" style="width: 100%; height: 44px; border-radius: 8px;">
       <button onclick="closeSettings()" style="margin-top: 20px; background: var(--bg-light); border: 1px solid var(--primary-color); color: var(--primary-color); padding: 12px 20px; border-radius: 8px; cursor: pointer; transition: all 0.2s ease; font-weight: 600;">Close</button>
     </div>
   </div>
@@ -275,7 +282,7 @@
     background-clip: text;
     font-family: monospace;
     line-height: 1;
-    transform: translateX(-20px); /* <- This nudges it 10px left */
+    transform: translateX(-20px);
   ">
     
     
@@ -297,10 +304,7 @@
 
 
 
-
-
   </pre>
-
 
   <div style="margin-bottom: 1.5rem; padding-left: 0;">
     <button id="toggleAllBtn" onclick="toggleAllSections()" style="background: var(--bg-light); border: 1px solid var(--border-color); color: var(--text-secondary); padding: 8px 16px; font-size: 0.85rem; cursor: pointer; font-family: inherit; outline: none; border-radius: 6px; transition: all 0.2s ease; font-weight: 500;">📁 Collapse All</button>
@@ -339,6 +343,8 @@
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
       </select>
       <div id="relatives"></div>
     </div>
@@ -355,175 +361,43 @@
     </div>
   </div>
 
- 
+  <div class="section">
+    <div onclick="toggleSection('ascii')" style="cursor: pointer; display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding: 12px 16px; background: var(--bg-light); border: 1px solid var(--border-color); border-radius: 8px; transition: all 0.2s ease;">
+      <button class="expand-btn" id="asciiArrow" style="pointer-events: none;">▼</button>
+      <label style="margin: 0; cursor: pointer; font-weight: 600; color: var(--text-primary);">ASCII Art Settings</label>
+    </div>
+    <div id="asciiSection">
+      <label>ASCII Art Header (optional)</label>
+      <textarea id="asciiHeader" placeholder="Paste ASCII art for header here..." rows="6" style="font-family: monospace; white-space: pre; overflow-wrap: normal;"></textarea>
 
-  <div class="main-buttons" style="display: flex; flex-direction: column; gap: 12px; margin-top: 3rem; padding: 0;">
+      <label>ASCII Art Footer (optional)</label>
+      <textarea id="asciiFooter" placeholder="Paste ASCII art for footer here..." rows="6" style="font-family: monospace; white-space: pre; overflow-wrap: normal;"></textarea>
 
-    <!-- Generate Text -->
-    <button onclick="generateTXT()"
-      style="background: var(--primary-color);
-             border: 1px solid var(--primary-color);
-             color: var(--bg-dark);
-             padding: 16px 20px;
-             font-size: 1rem;
-             border-radius: 8px;
-             cursor: pointer;
-             font-family: inherit;
-             width: 100%;
-             font-weight: 600;
-             transition: all 0.2s ease;
-             box-shadow: 0 2px 4px rgba(0, 212, 170, 0.2);">
-      ✨ Generate Text
-    </button>
-
-    <!-- Copy to Clipboard -->
-    <button onclick="copyToClipboard()"
-      style="background: var(--bg-darker);
-             border: 1px solid var(--secondary-color);
-             color: var(--secondary-color);
-             padding: 14px 20px;
-             font-size: 0.95rem;
-             border-radius: 8px;
-             cursor: pointer;
-             font-family: inherit;
-             width: 100%;
-             font-weight: 500;
-             transition: all 0.2s ease;">
-      📋 Copy to Clipboard
-    </button>
-
-    <!-- Separator -->
-     <div style="text-align: center; color: #666; font-weight: bold; font-family: monospace; font-size: 0.9rem; margin: 4px 0;">
-    --- ---
+      <label>ASCII Art Separator (optional)</label>
+      <textarea id="asciiSeparator" placeholder="Paste ASCII art to use between sections..." rows="4" style="font-family: monospace; white-space: pre; overflow-wrap: normal;"></textarea>
+    </div>
   </div>
 
-    <!-- Open Doxbin -->
-    <button onclick="redirectToDoxbin()"
-      style="background: var(--bg-darker);
-             border: 1px solid var(--tertiary-color);
-             color: var(--tertiary-color);
-             padding: 14px 20px;
-             font-size: 0.95rem;
-             border-radius: 8px;
-             cursor: pointer;
-             font-family: inherit;
-             width: 100%;
-             font-weight: 500;
-             transition: all 0.2s ease;">
-      🌐 Open Doxbin.net
-    </button>
-
-    <!-- ASCII Generator -->
-    <button onclick="redirectToASCII()"
-      style="background: var(--bg-darker);
-             border: 1px solid var(--accent-color);
-             color: var(--accent-color);
-             padding: 14px 20px;
-             font-size: 0.95rem;
-             border-radius: 8px;
-             cursor: pointer;
-             font-family: inherit;
-             width: 100%;
-             font-weight: 500;
-             transition: all 0.2s ease;">
-      🎨 ASCII Generator
-    </button>
-
-    <!-- GitHub Link -->
-    <button onclick="window.location.href='https://github.com/levifrsn63'"
-      style="background: #f1c40f;
-             border: 1px solid #f1c40f;
-             color: #222;
-             padding: 14px 20px;
-             font-size: 0.95rem;
-             border-radius: 8px;
-             cursor: pointer;
-             font-family: inherit;
-             width: 100%;
-             font-weight: 600;
-             transition: all 0.2s ease;">
-       🚀 View My GitHub
-    </button>
-
+  <div style="display: flex; justify-content: center; gap: 10px; margin-top: 2rem; padding: 1rem; flex-wrap: wrap;">
+    <button onclick="generateTXT()" style="background: #222; border: 1px solid var(--primary-color); color: var(--primary-color); padding: 12px 24px; font-size: 1rem; border-radius: 6px; cursor: pointer; font-family: monospace;">Generate Text</button>
+    <button onclick="copyToClipboard()" style="background: #333; border: 1px solid #00f; color: #00f; padding: 12px 24px; font-size: 1rem; border-radius: 6px; cursor: pointer; font-family: monospace;">📋 Copy to Clipboard</button>
+    <button onclick="redirectToDoxbin()" style="background: #333; border: 1px solid var(--tertiary-color); color: var(--tertiary-color); padding: 12px 24px; font-size: 1rem; border-radius: 6px; cursor: pointer; font-family: monospace;">🌐 Open Doxbin.net</button>
   </div>
 
+  <div class="ascii-box hidden" id="previewBox"></div>
 
-
-  <style>
-    .main-buttons button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
-
-    .main-buttons button:first-child:hover {
-      background: var(--accent-color);
-      border-color: var(--accent-color);
-      box-shadow: 0 4px 16px rgba(255, 217, 61, 0.3);
-    }
-
-    @media (min-width: 768px) {
-      .main-buttons {
-        flex-direction: row !important;
-        justify-content: center;
-        gap: 16px !important;
-      }
-      .main-buttons button {
-        width: auto !important;
-        padding: 16px 32px !important;
-        font-size: 1rem !important;
-      }
-    }
-  </style>
-
-  <div class="ascii-box" id="previewBox" style="display:none;"></div>
-
-  <div style="text-align: center; margin-top: 3rem; padding: 2rem 0 1rem 0; border-top: 1px solid var(--border-color); color: var(--text-secondary); font-size: 0.9rem;">
-    <p style="margin: 0;">GITHUB: <a href="https://github.com/levifrsn63" target="_blank" style="color: var(--primary-color); text-decoration: underline; font-weight: 500; transition: color 0.2s ease;">@levifrsn63</a></p>
+  <div style="text-align: center; margin-top: 2rem; padding: 1rem; border-top: 1px solid var(--primary-color); color: #666; font-size: 0.9rem;">
+    <p style="margin: 0;">Created by <a href="https://github.com/levifrsn63" target="_blank" style="color: var(--primary-color); text-decoration: none;">levifrsn63</a></p>
   </div>
 
 <script>
-  // Render relatives based on count
-  function renderRelatives() {
-    const container = document.getElementById('relatives');
-    container.innerHTML = '';
-    const count = parseInt(document.getElementById('relativeCount').value);
+  // Global state
+  let personalFields = [];
+  let portfolioFields = [];
+  let sectionsCollapsed = {};
+  let generatedText = '';
 
-    for (let i = 0; i < count; i++) {
-      const div = document.createElement('div');
-      div.className = 'relative-field';
-      div.innerHTML = `
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding: 8px; background: #333; border: 1px solid #0f0; border-radius: 3px;">
-          <span style="color: #0f0; font-weight: bold;">Relative ${i + 1}</span>
-          <div class="button-container">
-            <button class="edit-btn" onclick="editRelative(${i})" title="Edit relative">✏️</button>
-            <button class="remove-btn" onclick="removeRelative(${i})" title="Delete this relative">🗑</button>
-          </div>
-        </div>
-        <label>Name</label><input type="text" id="rel_name_${i}" />
-        <label>Known As</label><input type="text" id="rel_known_${i}" />
-        <label>Age</label><input type="text" id="rel_age_${i}" />
-        <label>Occupation</label><input type="text" id="rel_occ_${i}" />
-        <label>Phone Number</label><input type="text" id="rel_phone_${i}" />
-        <label>Address</label><input type="text" id="rel_address_${i}" />
-      `;
-      container.appendChild(div);
-    }
-  }
-
-  // Remove relative by index, adjust select count, re-render
-  function removeRelative(index) {
-    let count = parseInt(document.getElementById('relativeCount').value);
-    if (count <= 0) return;
-    count--;
-    document.getElementById('relativeCount').value = count;
-    // We have to remove data in a smart way, easiest: re-render with count-1
-    renderRelatives();
-  }
-
-  // Personal fields container
-  const personalContainer = document.getElementById('personalFields');
-
-  // Initial default personal fields
+  // Initialize default personal fields
   const defaultPersonalFields = [
     {label: 'Full Name', value: '', editing: false},
     {label: 'Known As/Aliases', value: '', editing: false},
@@ -540,305 +414,12 @@
     {label: 'Selfie Link', value: '', editing: false},
   ];
 
-  // Store personal fields as array of objects {label, value, editing}
-  let personalFieldsData = [...defaultPersonalFields];
-
-  // Portfolio fields container
-  const portfolioContainer = document.getElementById('portfolioFields');
-
-  // Initial default portfolio fields
-  const defaultPortfolioFields = [
-    {label: 'Website', value: 'https://example.com', editing: false},
-    {label: 'GitHub', value: 'https://github.com/example', editing: false},
-    {label: 'Resume', value: 'resume.pdf', editing: false},
-  ];
-
-  // Store portfolio fields as array of objects {label, value}
-  let portfolioFieldsData = [...defaultPortfolioFields];
-
-  function renderPersonalFields() {
-    personalContainer.innerHTML = '';
-    personalFieldsData.forEach((field, i) => {
-      const div = document.createElement('div');
-      div.className = 'portfolio-field';
-      div.innerHTML = `
-        <div style="background: var(--bg-dark); padding: 8px; border: 2px solid var(--primary-color); color: var(--primary-color); font-family: monospace; border-radius: 0; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);">
-          <div style="display: flex; align-items: center; gap: 8px;">
-            <span>${field.label || 'Untitled Field'}</span>
-          </div>
-          <div class="button-container">
-            <button class="edit-btn" onclick="togglePersonalLabelEdit(${i})" title="${field.editing ? 'Save label' : 'Edit label'}">${field.editing ? '💾' : '✏️'}</button>
-            <button class="remove-btn" onclick="removePersonalField(${i})" title="Delete this field">🗑</button>
-          </div>
-        </div>
-        <div class="field-content">
-          <div id="personal-label-edit-${i}" style="display: ${field.editing ? 'block' : 'none'};">
-            <label>Field Label</label>
-            <input type="text" class="personal-label" data-index="${i}" value="${field.label}" oninput="updatePersonalFieldLabel(${i}, this.value)" style="margin-bottom: 16px;" />
-          </div>
-          <label>Field Value</label>
-          <div style="display: flex; gap: 8px; align-items: center;">
-            <input type="text" class="personal-value" data-index="${i}" value="${field.value}" oninput="updatePersonalFieldValue(${i}, this.value)" style="flex: 1;" />
-            <button onclick="pasteFromClipboard(${i})" style="background: #333333; border: 1px solid #666666; color: #666666; padding: 8px; font-size: 0.9rem; border-radius: 4px; cursor: pointer; font-family: inherit; font-weight: 500; transition: all 0.2s ease; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;">📋</button>
-          </div>
-        </div>
-      `;
-      personalContainer.appendChild(div);
-    });
-  }
-
-    function renderLinkFields() {
-    personalContainer.innerHTML = '';
-    personalFieldsData.forEach((field, i) => {
-      const div = document.createElement('div');
-      div.className = 'portfolio-field';
-      div.innerHTML = `
-        <div style="background: var(--bg-dark); padding: 8px; border: 2px solid var(--primary-color); color: var(--primary-color); font-family: monospace; border-radius: 0; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);">
-          <div style="display: flex; align-items: center; gap: 8px;">
-            <span>${field.label || 'Untitled Field'}</span>
-          </div>
-          <div class="button-container">
-            <button class="edit-btn" onclick="togglePersonalLabelEdit(${i})" title="${field.editing ? 'Save label' : 'Edit label'}">${field.editing ? '💾' : '✏️'}</button>
-            <button class="remove-btn" onclick="removePersonalField(${i})" title="Delete this field">🗑</button>
-          </div>
-        </div>
-        <div class="field-content">
-          <div id="personal-label-edit-${i}" style="display: ${field.editing ? 'block' : 'none'};">
-            <label>Field Label</label>
-            <input type="text" class="personal-label" data-index="${i}" value="${field.label}" oninput="updatePersonalFieldLabel(${i}, this.value)" style="margin-bottom: 16px;" />
-          </div>
-          <label>Field Value</label>
-          <div style="display: flex; gap: 8px; align-items: center;">
-            <input type="text" class="personal-value" data-index="${i}" value="${field.value}" oninput="updatePersonalFieldValue(${i}, this.value)" style="flex: 1;" />
-            <button onclick="pasteFromClipboard(${i})" style="background: #333333; border: 1px solid #666666; color: #666666; padding: 8px; font-size: 0.9rem; border-radius: 4px; cursor: pointer; font-family: inherit; font-weight: 500; transition: all 0.2s ease; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;">📋</button>
-          </div>
-        </div>
-      `;
-      personalContainer.appendChild(div);
-    });
-  }
-
-   function pasteFromClipboard(index) {
-        navigator.clipboard.readText().then(text => {
-            updatePersonalFieldValue(index, text);
-            // Update the input field directly without re-rendering
-            const input = document.querySelector(`input.personal-value[data-index="${index}"]`);
-            if (input) {
-                input.value = text;
-            }
-        }).catch(err => {
-            console.error('Failed to read clipboard contents: ', err);
-        });
-    }
-
-  function addPersonalField() {
-    personalFieldsData.push({label: '', value: '', editing: false});
+  // Initialize the form
+  function initializeForm() {
+    personalFields = [...defaultPersonalFields];
     renderPersonalFields();
-  }
-
-   function addLinkField() {
-    personalFieldsData.push({label: '', value: '', editing: false});
-    renderLinkFields();
-  }
-
-  function removePersonalField(index) {
-    personalFieldsData.splice(index, 1);
-    renderPersonalFields();
-  }
-
-  function togglePersonalLabelEdit(index) {
-    personalFieldsData[index].editing = !personalFieldsData[index].editing;
-    renderPersonalFields();
-  }
-
-  function updatePersonalFieldLabel(index, newLabel) {
-    personalFieldsData[index].label = newLabel;
-  }
-
-  function updatePersonalFieldValue(index, newValue) {
-    personalFieldsData[index].value = newValue;
-  }
-
-  function editRelative(index) {
-    // For now, just focus on the first input of this relative
-    document.getElementById(`rel_name_${index}`)?.focus();
-  }
-
-  function renderPortfolioFields() {
-    portfolioContainer.innerHTML = '';
-    portfolioFieldsData.forEach((field, i) => {
-      const div = document.createElement('div');
-      div.className = 'portfolio-field';
-      div.innerHTML = `
-        <div style="background: var(--bg-dark); padding: 8px; border: 2px solid var(--primary-color); color: var(--primary-color); font-family: monospace; border-radius: 0; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);">
-          <div style="display: flex; align-items: center; gap: 8px;">
-            <span>${field.label || 'Untitled Field'}</span>
-          </div>
-          <div class="button-container">
-            <button class="edit-btn" onclick="toggleLabelEdit(${i})" title="${field.editing ? 'Save label' : 'Edit label'}">${field.editing ? '💾' : '✏️'}</button>
-            <button class="remove-btn" onclick="removePortfolioField(${i})" title="Delete this field">🗑</button>
-          </div>
-        </div>
-        <div class="field-content">
-          <div id="label-edit-${i}" style="display: ${field.editing ? 'block' : 'none'};">
-            <label>Field Label</label>
-            <input type="text" class="portfolio-label" data-index="${i}" value="${field.label}" oninput="updatePortfolioFieldLabel(${i}, this.value)" style="margin-bottom: 16px;" />
-          </div>
-          <label>Field Value</label>
-          <input type="text" class="portfolio-value" data-index="${i}" value="${field.value}" oninput="updatePortfolioFieldValue(${i}, this.value)" />
-        </div>
-      `;
-      portfolioContainer.appendChild(div);
-    });
-  }
-
-  function addPortfolioField() {
-    portfolioFieldsData.push({label: '', value: '', editing: false});
+    renderRelatives();
     renderPortfolioFields();
-  }
-
-  function removePortfolioField(index) {
-    portfolioFieldsData.splice(index, 1);
-    renderPortfolioFields();
-  }
-
-  function toggleLabelEdit(index) {
-    portfolioFieldsData[index].editing = !portfolioFieldsData[index].editing;
-    renderPortfolioFields();
-  }
-
-  function updatePortfolioFieldLabel(index, newLabel) {
-    portfolioFieldsData[index].label = newLabel;
-  }
-
-  function updatePortfolioFieldValue(index, newValue) {
-    portfolioFieldsData[index].value = newValue;
-  }
-
-  // Generate the TXT content
-  function generateTXT() {
-    let content = '';
-    const separatorArt = document.getElementById('asciiSeparator').value.trim();
-
-    // Add ASCII art header if provided
-    const headerArt = document.getElementById('asciiHeader').value.trim();
-    if (headerArt) {
-      content += headerArt + '\n\n';
-    }
-
-    // Add reason section if provided
-    const reasonText = document.getElementById('reasonOfDox').value.trim();
-    if (reasonText) {
-      content += '╔═════════════════════════════════════════════════════════════════════════════╗\n';
-      content += '║                              REASON OF DOX                                  ║\n';
-      content += '╚═════════════════════════════════════════════════════════════════════════════╝\n\n';
-      content += reasonText + '\n\n';
-
-      if (separatorArt) {
-        content += separatorArt + '\n\n';
-      }
-    }
-
-    // Header for Personal Information
-    content += '╔═════════════════════════════════════════════════════════════════════════════╗\n';
-    content += '║                          PERSONAL INFORMATION                               ║\n';
-    content += '╚═════════════════════════════════════════════════════════════════════════════╝\n\n';
-
-    // Add personal fields
-    personalFieldsData.forEach((field) => {
-      if (field.label.trim() !== '' && field.value.trim() !== '') {
-        const dots = '.'.repeat(Math.max(1, 20 - field.label.length));
-        content += `${field.label} ${dots} ${field.value}\n`;
-      }
-    });
-    content += '\n';
-
-    // Add separator before relatives if both exist
-    const relativeCount = parseInt(document.getElementById('relativeCount').value);
-    if (relativeCount > 0 && separatorArt) {
-      content += separatorArt + '\n\n';
-    }
-
-    // Relatives section
-    if (relativeCount > 0) {
-      content += '╔═══╦═══════════════════════╦═══╦════════════════════════════════════════╦═════╗\n';
-      content += '║░░░║       RELATIVES       ║ + ║░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░║ ITA ║\n';
-      content += '╚═══╩═══════════════════════╩═══╩════════════════════════════════════════════════════╩═════╝\n\n';
-
-      for (let i = 0; i < relativeCount; i++) {
-        content += `Relative ${i + 1}:\n`;
-        content += `  Name ............... ${document.getElementById(`rel_name_${i}`)?.value || ''}\n`;
-        content += `  Known As ........... ${document.getElementById(`rel_known_${i}`)?.value || ''}\n`;
-        content += `  Age ................ ${document.getElementById(`rel_age_${i}`)?.value || ''}\n`;
-        content += `  Occupation ......... ${document.getElementById(`rel_occ_${i}`)?.value || ''}\n`;
-        content += `  Phone Number ....... ${document.getElementById(`rel_phone_${i}`)?.value || ''}\n`;
-        content += `  Address ............ ${document.getElementById(`rel_address_${i}`)?.value || ''}\n\n`;
-      }
-    }
-
-    // Add separator before portfolio if both exist
-    if (portfolioFieldsData.length > 0 && separatorArt) {
-      content += separatorArt + '\n\n';
-    }
-
-    // Portfolio section
-    if (portfolioFieldsData.length > 0) {
-      content += '╔═══════════════════════╗\n';
-      content += '║      PORTFOLIO        ║\n';
-      content += '╚═══════════════════════╝\n\n';
-
-      portfolioFieldsData.forEach((field) => {
-        if (field.label.trim() !== '') {
-          content += `${field.label} : ${field.value}\n`;
-        }
-      });
-    }
-
-    // Add ASCII art footer if provided
-    const footerArt = document.getElementById('asciiFooter').value.trim();
-    if (footerArt) {
-      content += '\n' + footerArt;
-    }
-
-    // Show output
-    const previewBox = document.getElementById('previewBox');
-    previewBox.style.display = 'block';
-    previewBox.textContent = content;
-  }
-
-  // Copy to clipboard function
-  function copyToClipboard() {
-    const previewBox = document.getElementById('previewBox');
-    const content = previewBox.textContent;
-
-    if (!content) {
-      alert('Please generate text first!');
-      return;
-    }
-
-    navigator.clipboard.writeText(content).then(() => {
-      // Visual feedback
-      const button = event.target;
-      const originalText = button.textContent;
-      button.textContent = '✅ Copied!';
-      button.style.background = '#0f0';
-      button.style.color = '#000';
-
-      setTimeout(() => {
-        button.textContent = originalText;
-        button.style.background = '#333';
-        button.style.color = '#00f';
-      }, 2000);
-    }).catch(() => {
-      // Fallback for older browsers
-      const textArea = document.createElement('textarea');
-      textArea.value = content;
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textArea);
-      alert('Text copied to clipboard!');
-    });
   }
 
   // Settings functions
@@ -854,80 +435,386 @@
     const primary = document.getElementById('primaryColor').value;
     const secondary = document.getElementById('secondaryColor').value;
     const tertiary = document.getElementById('tertiaryColor').value;
-
+    
     document.documentElement.style.setProperty('--primary-color', primary);
     document.documentElement.style.setProperty('--secondary-color', secondary);
     document.documentElement.style.setProperty('--tertiary-color', tertiary);
+    document.documentElement.style.setProperty('--text-primary', primary);
   }
 
+  // Section toggle functions
+  function toggleSection(sectionName) {
+    const section = document.getElementById(sectionName + 'Section');
+    const arrow = document.getElementById(sectionName + 'Arrow');
+    
+    if (section.style.display === 'none') {
+      section.style.display = 'block';
+      arrow.classList.remove('collapsed');
+      sectionsCollapsed[sectionName] = false;
+    } else {
+      section.style.display = 'none';
+      arrow.classList.add('collapsed');
+      sectionsCollapsed[sectionName] = true;
+    }
+  }
+
+  function toggleAllSections() {
+    const sections = ['reason', 'personal', 'relatives', 'portfolio', 'ascii'];
+    const allCollapsed = sections.every(name => sectionsCollapsed[name]);
+    
+    sections.forEach(sectionName => {
+      const section = document.getElementById(sectionName + 'Section');
+      const arrow = document.getElementById(sectionName + 'Arrow');
+      
+      if (allCollapsed) {
+        section.style.display = 'block';
+        arrow.classList.remove('collapsed');
+        sectionsCollapsed[sectionName] = false;
+      } else {
+        section.style.display = 'none';
+        arrow.classList.add('collapsed');
+        sectionsCollapsed[sectionName] = true;
+      }
+    });
+    
+    const btn = document.getElementById('toggleAllBtn');
+    btn.textContent = allCollapsed ? '📁 Collapse All' : '📂 Expand All';
+  }
+
+  // Personal fields functions
+  function renderPersonalFields() {
+    const container = document.getElementById('personalFields');
+    container.innerHTML = '';
+    
+    personalFields.forEach((field, index) => {
+      const div = document.createElement('div');
+      div.className = 'relative-field';
+      
+      if (field.editing) {
+        div.innerHTML = `
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+            <input type="text" id="editLabel_${index}" value="${field.label}" style="width: 70%; margin: 0;">
+            <div>
+              <button onclick="savePersonalField(${index})" style="background: var(--secondary-color); color: var(--bg-dark); border: none; padding: 4px 8px; margin-right: 4px; border-radius: 3px; cursor: pointer;">💾</button>
+              <button onclick="cancelEditPersonalField(${index})" style="background: var(--tertiary-color); color: var(--bg-dark); border: none; padding: 4px 8px; border-radius: 3px; cursor: pointer;">❌</button>
+            </div>
+          </div>
+        `;
+      } else {
+        div.innerHTML = `
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding: 8px; background: #333; border: 1px solid var(--primary-color); border-radius: 3px;">
+            <span style="color: var(--primary-color); font-weight: bold;">${field.label}</span>
+            <div class="button-container">
+              <button class="edit-btn" onclick="editPersonalField(${index})" title="Edit field">✏️</button>
+              <button class="remove-btn" onclick="removePersonalField(${index})" title="Delete this field">🗑</button>
+            </div>
+          </div>
+          <input type="text" id="personal_${index}" value="${field.value}" onchange="updatePersonalField(${index}, this.value)" placeholder="Enter ${field.label.toLowerCase()}..." />
+        `;
+      }
+      
+      container.appendChild(div);
+    });
+  }
+
+  function addPersonalField() {
+    const label = prompt('Enter field label:');
+    if (label && label.trim()) {
+      personalFields.push({label: label.trim(), value: '', editing: false});
+      renderPersonalFields();
+    }
+  }
+
+  function editPersonalField(index) {
+    personalFields[index].editing = true;
+    renderPersonalFields();
+  }
+
+  function savePersonalField(index) {
+    const newLabel = document.getElementById(`editLabel_${index}`).value;
+    if (newLabel && newLabel.trim()) {
+      personalFields[index].label = newLabel.trim();
+      personalFields[index].editing = false;
+      renderPersonalFields();
+    }
+  }
+
+  function cancelEditPersonalField(index) {
+    personalFields[index].editing = false;
+    renderPersonalFields();
+  }
+
+  function removePersonalField(index) {
+    personalFields.splice(index, 1);
+    renderPersonalFields();
+  }
+
+  function updatePersonalField(index, value) {
+    personalFields[index].value = value;
+  }
+
+  // Relatives functions
+  function renderRelatives() {
+    const container = document.getElementById('relatives');
+    container.innerHTML = '';
+    const count = parseInt(document.getElementById('relativeCount').value);
+
+    for (let i = 0; i < count; i++) {
+      const div = document.createElement('div');
+      div.className = 'relative-field';
+      div.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding: 8px; background: #333; border: 1px solid var(--primary-color); border-radius: 3px;">
+          <span style="color: var(--primary-color); font-weight: bold;">Relative ${i + 1}</span>
+          <div class="button-container">
+            <button class="remove-btn" onclick="removeRelative(${i})" title="Delete this relative">🗑</button>
+          </div>
+        </div>
+        <label>Name</label><input type="text" id="rel_name_${i}" />
+        <label>Known As</label><input type="text" id="rel_known_${i}" />
+        <label>Age</label><input type="text" id="rel_age_${i}" />
+        <label>Occupation</label><input type="text" id="rel_occ_${i}" />
+        <label>Phone Number</label><input type="text" id="rel_phone_${i}" />
+        <label>Address</label><input type="text" id="rel_address_${i}" />
+      `;
+      container.appendChild(div);
+    }
+  }
+
+  function removeRelative(index) {
+    let count = parseInt(document.getElementById('relativeCount').value);
+    if (count <= 0) return;
+    count--;
+    document.getElementById('relativeCount').value = count;
+    renderRelatives();
+  }
+
+  // Portfolio functions
+  function renderPortfolioFields() {
+    const container = document.getElementById('portfolioFields');
+    container.innerHTML = '';
+    
+    portfolioFields.forEach((field, index) => {
+      const div = document.createElement('div');
+      div.className = 'portfolio-field';
+      
+      if (field.editing) {
+        div.innerHTML = `
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+            <input type="text" id="editPortfolioLabel_${index}" value="${field.label}" style="width: 70%; margin: 0;">
+            <div>
+              <button onclick="savePortfolioField(${index})" style="background: var(--secondary-color); color: var(--bg-dark); border: none; padding: 4px 8px; margin-right: 4px; border-radius: 3px; cursor: pointer;">💾</button>
+              <button onclick="cancelEditPortfolioField(${index})" style="background: var(--tertiary-color); color: var(--bg-dark); border: none; padding: 4px 8px; border-radius: 3px; cursor: pointer;">❌</button>
+            </div>
+          </div>
+        `;
+      } else {
+        div.innerHTML = `
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding: 8px; background: #333; border: 1px solid var(--primary-color); border-radius: 3px;">
+            <span style="color: var(--primary-color); font-weight: bold;">${field.label}</span>
+            <div class="button-container">
+              <button class="edit-btn" onclick="editPortfolioField(${index})" title="Edit field">✏️</button>
+              <button class="remove-btn" onclick="removePortfolioField(${index})" title="Delete this field">🗑</button>
+            </div>
+          </div>
+          <input type="text" id="portfolio_${index}" value="${field.value}" onchange="updatePortfolioField(${index}, this.value)" placeholder="Enter ${field.label.toLowerCase()}..." />
+        `;
+      }
+      
+      container.appendChild(div);
+    });
+  }
+
+  function addPortfolioField() {
+    const label = prompt('Enter field label:');
+    if (label && label.trim()) {
+      portfolioFields.push({label: label.trim(), value: '', editing: false});
+      renderPortfolioFields();
+    }
+  }
+
+  function editPortfolioField(index) {
+    portfolioFields[index].editing = true;
+    renderPortfolioFields();
+  }
+
+  function savePortfolioField(index) {
+    const newLabel = document.getElementById(`editPortfolioLabel_${index}`).value;
+    if (newLabel && newLabel.trim()) {
+      portfolioFields[index].label = newLabel.trim();
+      portfolioFields[index].editing = false;
+      renderPortfolioFields();
+    }
+  }
+
+  function cancelEditPortfolioField(index) {
+    portfolioFields[index].editing = false;
+    renderPortfolioFields();
+  }
+
+  function removePortfolioField(index) {
+    portfolioFields.splice(index, 1);
+    renderPortfolioFields();
+  }
+
+  function updatePortfolioField(index, value) {
+    portfolioFields[index].value = value;
+  }
+
+  // Text generation function - FIXED
+  function generateTXT() {
+    let output = '';
+    
+    // Add ASCII header if provided
+    const asciiHeader = document.getElementById('asciiHeader').value;
+    if (asciiHeader.trim()) {
+      output += asciiHeader + '\n\n';
+    }
+    
+    // Add reason section
+    const reason = document.getElementById('reasonOfDox').value;
+    if (reason.trim()) {
+      output += '═══════════════════════════════════════\n';
+      output += '                REASON\n';
+      output += '═══════════════════════════════════════\n';
+      output += reason + '\n\n';
+    }
+    
+    // Add ASCII separator if provided
+    const asciiSeparator = document.getElementById('asciiSeparator').value;
+    
+    // Add personal information
+    output += '═══════════════════════════════════════\n';
+    output += '           PERSONAL INFORMATION\n';
+    output += '═══════════════════════════════════════\n';
+    
+    personalFields.forEach(field => {
+      const element = document.getElementById(`personal_${personalFields.indexOf(field)}`);
+      const value = element ? element.value : field.value;
+      if (value && value.trim()) {
+        output += `${field.label}: ${value}\n`;
+      }
+    });
+    output += '\n';
+    
+    if (asciiSeparator.trim()) {
+      output += asciiSeparator + '\n\n';
+    }
+    
+    // Add relatives information
+    const relativeCount = parseInt(document.getElementById('relativeCount').value);
+    if (relativeCount > 0) {
+      output += '═══════════════════════════════════════\n';
+      output += '              RELATIVES\n';
+      output += '═══════════════════════════════════════\n';
+      
+      for (let i = 0; i < relativeCount; i++) {
+        const name = document.getElementById(`rel_name_${i}`)?.value || '';
+        const known = document.getElementById(`rel_known_${i}`)?.value || '';
+        const age = document.getElementById(`rel_age_${i}`)?.value || '';
+        const occ = document.getElementById(`rel_occ_${i}`)?.value || '';
+        const phone = document.getElementById(`rel_phone_${i}`)?.value || '';
+        const address = document.getElementById(`rel_address_${i}`)?.value || '';
+        
+        if (name || known || age || occ || phone || address) {
+          output += `\n--- Relative ${i + 1} ---\n`;
+          if (name) output += `Name: ${name}\n`;
+          if (known) output += `Known As: ${known}\n`;
+          if (age) output += `Age: ${age}\n`;
+          if (occ) output += `Occupation: ${occ}\n`;
+          if (phone) output += `Phone Number: ${phone}\n`;
+          if (address) output += `Address: ${address}\n`;
+        }
+      }
+      output += '\n';
+      
+      if (asciiSeparator.trim()) {
+        output += asciiSeparator + '\n\n';
+      }
+    }
+    
+    // Add portfolio information
+    if (portfolioFields.length > 0) {
+      let hasPortfolioData = false;
+      let portfolioOutput = '═══════════════════════════════════════\n';
+      portfolioOutput += '              PORTFOLIO\n';
+      portfolioOutput += '═══════════════════════════════════════\n';
+      
+      portfolioFields.forEach((field, index) => {
+        const element = document.getElementById(`portfolio_${index}`);
+        const value = element ? element.value : field.value;
+        if (value && value.trim()) {
+          portfolioOutput += `${field.label}: ${value}\n`;
+          hasPortfolioData = true;
+        }
+      });
+      
+      if (hasPortfolioData) {
+        output += portfolioOutput + '\n';
+      }
+    }
+    
+    // Add ASCII footer if provided
+    const asciiFooter = document.getElementById('asciiFooter').value;
+    if (asciiFooter.trim()) {
+      output += asciiFooter + '\n';
+    }
+    
+    // Store generated text for clipboard
+    generatedText = output;
+    
+    // Display in preview box
+    const previewBox = document.getElementById('previewBox');
+    previewBox.textContent = output;
+    previewBox.classList.remove('hidden');
+    previewBox.classList.add('visible');
+    
+    // Scroll to preview box
+    previewBox.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Copy to clipboard function - FIXED
+  function copyToClipboard() {
+    if (!generatedText) {
+      alert('Please generate text first!');
+      return;
+    }
+    
+    navigator.clipboard.writeText(generatedText).then(() => {
+      // Visual feedback
+      const btn = event.target;
+      const originalText = btn.textContent;
+      btn.textContent = '✅ Copied!';
+      btn.style.background = 'var(--secondary-color)';
+      btn.style.color = 'var(--bg-dark)';
+      
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = '#333';
+        btn.style.color = '#00f';
+      }, 2000);
+    }).catch(err => {
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = generatedText;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      
+      alert('Text copied to clipboard!');
+    });
+  }
+
+  // Redirect to doxbin
   function redirectToDoxbin() {
     window.open('https://doxbin.net', '_blank');
   }
 
-  function redirectToASCII() {
-    window.open('https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20', '_blank');
-  }
-
-  // Section collapse state
-  const sectionStates = {
-    reason: false,
-    personal: false,
-    relatives: false,
-    portfolio: false,
-    ascii: false
-  };
-
-  function toggleSection(sectionName) {
-    sectionStates[sectionName] = !sectionStates[sectionName];
-    const section = document.getElementById(sectionName + 'Section');
-    const arrow = document.getElementById(sectionName + 'Arrow');
-
-    if (sectionStates[sectionName]) {
-      section.style.display = 'none';
-      arrow.classList.add('collapsed');
-    } else {
-      section.style.display = 'block';
-      arrow.classList.remove('collapsed');
-    }
-  }
-
-  // Initial setup - set all sections collapsed
-  function initializeSections() {
-    Object.keys(sectionStates).forEach(sectionName => {
-      sectionStates[sectionName] = true;
-      toggleSection(sectionName);
-    });
-  }
-
-  // Toggle all sections function
-  function toggleAllSections() {
-    const toggleBtn = document.getElementById('toggleAllBtn');
-    const anyExpanded = Object.values(sectionStates).some(state => !state);
-
-    if (anyExpanded) {
-      // Collapse all
-      Object.keys(sectionStates).forEach(sectionName => {
-        if (!sectionStates[sectionName]) {
-          toggleSection(sectionName);
-        }
-      });
-      toggleBtn.textContent = '📂 Expand All';
-    } else {
-      // Expand all
-      Object.keys(sectionStates).forEach(sectionName => {
-        if (sectionStates[sectionName]) {
-          toggleSection(sectionName);
-        }
-      });
-      toggleBtn.textContent = '📁 Collapse All';
-    }
-  }
-
-  // Initial setup
-  renderPersonalFields();
-  renderRelatives();
-  renderPortfolioFields();
-  initializeSections();
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    initializeForm();
+  });
 </script>
+
 </body>
 </html>
